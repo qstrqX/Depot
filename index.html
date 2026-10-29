@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Depot & Alltagssarkasmus</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--card:#141c30;--muted:#9ba8bf;--green:#6ee7a0;--border:#28344c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f4f7ff;font:16px system-ui,sans-serif}
+header{padding:28px 20px 18px;max-width:1050px;margin:auto}
+h1{font-size:clamp(27px,5vw,40px);margin:0}
+p{color:var(--muted);margin:7px 0}
+main{max-width:1050px;margin:auto;padding:0 20px 40px}
+section{margin:22px 0}
+h2{font-size:19px;margin:0 0 13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:19px;min-width:0}
+.label{color:var(--muted);font-size:13px}
+.value{font-size:29px;font-weight:750;margin:8px 0;overflow-wrap:anywhere}
+.green{color:var(--green)}
+.small{font-size:12px;color:var(--muted)}
+input{width:100%;margin:6px 0 12px;padding:11px;background:#0b1020;border:1px solid var(--border);border-radius:9px;color:white;font:inherit}
+button{padding:11px 15px;background:var(--green);color:#07140c;border:0;border-radius:9px;font-weight:700;cursor:pointer}
+button.secondary{background:#26334b;color:white}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+hr{border:0;border-top:1px solid var(--border);margin:17px 0}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+  <p>DEIN FINANZ-ÜBERBLICK</p>
+  <h1>Depot <span class="green">&</span> Alltagssarkasmus.</h1>
+  <p>Langfristig denken. Schritt für Schritt aufbauen.</p>
+</header>
+<main>
+  <section>
+    <h2>Dein Depot</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Aktueller Depotwert (€)</div>
+        <div class="value" id="depotValue">1.561,00 €</div>
+        <div class="small">Wert bitte mit deiner Bank-App abgleichen.</div>
+      </div>
+      <div class="card">
+        <div class="label">Gewinn / Verlust (€)</div>
+        <div class="value green" id="profit">81,00 €</div>
+        <div class="small">Berechnet aus Depotwert minus Einstandswert.</div>
+      </div>
+      <div class="card">
+        <div class="label">Monatliche Einzahlung</div>
+        <div class="value">100 €</div>
+        <div class="small">50 € je Fonds, laut deinem aktuellen Plan.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fonds & Kurse</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Deka MSCI World UCITS ETF</div>
+        <div class="value" id="worldPrice">—</div>
+        <div class="small" id="worldChange">Kursdaten werden geladen …</div>
+      </div>
+      <div class="card">
+        <div class="label">Deka DividendenStrategie CF A</div>
+        <div class="value" id="divPrice">—</div>
+        <div class="small" id="divChange">Kursdaten werden geladen …</div>
+      </div>
+    </div>
+    <p class="small">Kurse stammen aus der JSON-Datei, sofern verfügbar. Die verwendeten Börsenkürzel müssen noch mit deinen exakten Fondsanteilen abgeglichen werden.</p>
+  </section>
+
+  <section>
+    <h2>Alltagssarkasmus · Etsy</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Umsatz (€)</div>
+        <div class="value" id="etsyRevenue">0,00 €</div>
+      </div>
+      <div class="card">
+        <div class="label">Gewinn nach Kosten (€)</div>
+        <div class="value" id="etsyProfit">0,00 €</div>
+      </div>
+      <div class="card">
+        <div class="label">Bestellungen</div>
+        <div class="value" id="etsyOrders">0</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <p>Trag deine Etsy-Zahlen hier manuell ein.</p>
+      <label class="label" for="revenue">Gesamtumsatz (€)</label>
+      <input id="revenue" type="number" min="0" step=".01" value="0">
+      <label class="label" for="costs">Gesamtkosten (€), z. B. Produktion und Gebühren</label>
+      <input id="costs" type="number" min="0" step=".01" value="0">
+      <label class="label" for="orders">Anzahl Bestellungen</label>
+      <input id="orders" type="number" min="0" step="1" value="0">
+      <button onclick="saveEtsy()">Zahlen speichern</button>
+      <p class="small">Die Angaben werden in diesem Browser gespeichert. Es gibt noch keine direkte Etsy-Verbindung.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Dein Weg zum Maserati</h2>
+    <div class="card">
+      <div class="row">
+        <div>
+          <div class="label">Dein selbst festgelegtes Sparziel (€)</div>
+          <div class="value" id="targetLabel">30.000 €</div>
+        </div>
+        <div>
+          <div class="label">Fortschritt</div>
+          <div class="value green" id="progress">5,2 %</div>
+        </div>
+      </div>
+      <label class="label" for="target">Sparziel ändern (€)</label>
+      <input id="target" type="number" min="1" value="30000">
+      <label class="label" for="saved">Für das Auto zurückgelegtes Geld (€)</label>
+      <input id="saved" type="number" min="0" step=".01" value="1551">
+      <button onclick="saveGoal()">Sparziel speichern</button>
+      <p class="small">Nur eine Orientierung. Künftige Renditen und Etsy-Gewinne sind nicht garantiert.</p>
+    </div>
+  </section>
+  <footer>Dein persönliches Dashboard · Keine Anlageberatung</footer>
+</main>
+
+<script>
+const euro = n => Number(n).toLocaleString("de-DE", {
+  style:"currency", currency:"EUR"
+});
+function loadEtsy(){
+  let d={revenue:0,costs:0,orders:0};
+  try{d={...d,...JSON.parse(localStorage.getItem("etsyData")||"{}")}}catch(e){}
+  revenue.value=d.revenue; costs.value=d.costs; orders.value=d.orders;
+  etsyRevenue.textContent=euro(d.revenue);
+  etsyProfit.textContent=euro(d.revenue-d.costs);
+  etsyOrders.textContent=d.orders;
+}
+function saveEtsy(){
+  const d={
+    revenue:Math.max(0,Number(revenue.value)||0),
+    costs:Math.max(0,Number(costs.value)||0),
+    orders:Math.max(0,Math.floor(Number(orders.value)||0))
+  };
+  localStorage.setItem("etsyData",JSON.stringify(d));
+  loadEtsy();
+}
+function loadGoal(){
+  let d={target:30000,saved:1551};
+  try{d={...d,...JSON.parse(localStorage.getItem("goalData")||"{}")}}catch(e){}
+  target.value=d.target;saved.value=d.saved;showGoal(d);
+}
+function showGoal(d){
+  targetLabel.textContent=euro(d.target);
+  const pct=Math.min(100,Math.max(0,d.saved/d.target*100));
+  progress.textContent=pct.toLocaleString("de-DE",{maximumFractionDigits:1})+" %";
+}
+function saveGoal(){
+  const d={
+    target:Math.max(1,Number(target.value)||30000),
+    saved:Math.max(0,Number(saved.value)||0)
+  };
+  localStorage.setItem("goalData",JSON.stringify(d));showGoal(d);
+}
+async function loadQuotes(){
+  try{
+    const r=await fetch("data/quotes.json");
+    if(!r.ok)throw Error("Kursdatei noch nicht verfügbar");
+    const d=await r.json(),q=d.quotes||{};
+    showQuote(q["ELFW.DE"],"worldPrice","worldChange");
+    showQuote(q["0P0000P8Q6.F"],"divPrice","divChange");
+  }catch(e){
+    worldChange.textContent="Noch keine Kursdaten verfügbar.";
+    divChange.textContent="Noch keine Kursdaten verfügbar.";
+  }
+}
+function showQuote(q,priceId,changeId){
+  if(!q||typeof q.price!=="number"){
+    document.getElementById(changeId).textContent="Kein Kurs verfügbar.";
+    return;
+  }
+  document.getElementById(priceId).textContent=
+    q.price.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:4})+" "+(q.currency||"EUR");
+  const c=Number(q.changePercent)||0;
+  document.getElementById(changeId).textContent=
+    (c>0?"+":"")+c.toLocaleString("de-DE",{maximumFractionDigits:2})+" % zum Vortag";
+}
+loadEtsy();
+loadGoal();
+loadQuotes();
+</script>
+</body>
+</html>
