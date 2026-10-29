@@ -1,8 +1,27 @@
-
 {
-  "updatedAt": null,
+  "updatedAt": "2026-10-29T21:41:10.332535+01:00",
   "source": "Yahoo Finance",
-  "quotes": {},
-  "baseline": {},
+  "quotes": {
+    "ELFW.DE": {
+      "symbol": "ELFW.DE",
+      "price": 45.145,
+      "prevClose": 44.609,
+      "changePercent": 1.2016,
+      "currency": "EUR",
+      "source": "Yahoo Finance"
+    },
+    "0P0000P8Q6.F": {
+      "symbol": "0P0000P8Q6.F",
+      "price": 245.82,
+      "prevClose": 244.23,
+      "changePercent": 0.651,
+      "currency": "EUR",
+      "source": "Yahoo Finance"
+    }
+  },
+  "baseline": {
+    "ELFW.DE": 45.145,
+    "0P0000P8Q6.F": 245.82
+  },
   "errors": {}
 }
