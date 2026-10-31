@@ -10,5 +10,11 @@
     "updatedAt": "2026-10-30T02:45:23.205539+01:00",
     "estimatedValue": 1561.0,
     "deltaSinceStart": 0.0
+  },
+  {
+    "date": "2026-10-31",
+    "updatedAt": "2026-10-31T02:43:50.385503+01:00",
+    "estimatedValue": 1552.26,
+    "deltaSinceStart": -8.74
   }
 ]

@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-10-30T02:45:23.205539+01:00",
+  "updatedAt": "2026-10-31T02:43:50.385503+01:00",
   "source": "Yahoo Finance",
   "quotes": {
     "ELFW.DE": {
       "symbol": "ELFW.DE",
-      "price": 45.145,
-      "prevClose": 44.609,
-      "changePercent": 1.2016,
+      "price": 44.527,
+      "prevClose": 44.585,
+      "changePercent": -0.1301,
       "currency": "EUR",
       "source": "Yahoo Finance"
     },
     "0P0000P8Q6.F": {
       "symbol": "0P0000P8Q6.F",
-      "price": 245.82,
-      "prevClose": 244.23,
-      "changePercent": 0.651,
+      "price": 246.32,
+      "prevClose": 243.79,
+      "changePercent": 1.0378,
       "currency": "EUR",
       "source": "Yahoo Finance"
     }
